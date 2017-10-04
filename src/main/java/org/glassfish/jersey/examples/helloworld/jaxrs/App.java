@@ -66,13 +66,7 @@ public class App {
     static HttpServer startServer() throws IOException {
         // create a new server listening at port 8080
         final HttpServer server = HttpServer.create(new InetSocketAddress(getBaseURI().getPort()), 0);
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-            @Override
-            public void run() {
-                server.stop(0);
-            }
-        }));
-
+ 
         // create a handler wrapping the JAX-RS application
         HttpHandler handler = RuntimeDelegate.getInstance().createEndpoint(new JaxRsApplication(), HttpHandler.class);
 
